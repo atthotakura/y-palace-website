@@ -16,7 +16,22 @@ Key hotel details:
 
 ## Assets
 
-Hotel photography is in [assets/](assets/) — 19 PNG images covering rooms, bathrooms, lounge areas, entrance, function hall, and exterior day/night shots. File names with spaces are the norm (e.g., `room 1.png`, `night picture.png`).
+Hotel photography is in [assets/](assets/) organized into four subdirectories — **not** the root `assets/` folder. All image `src` paths must point into these subdirectories:
+
+| Subdirectory | Files |
+|---|---|
+| `assets/premium-rooms-and-washrooms/` | angle1–3.jpeg, pic2–4.jpeg, bathroom–3.jpeg, couch.jpeg, table.jpeg (11 files) |
+| `assets/premium-twin-beds/` | angle1–4.jpeg (4 files) |
+| `assets/double-king-size-bed-suite-room/` | `Double Kind Size Bed Suite Room.jpeg` × 3 (filenames have spaces — URL-encode as `%20`) |
+| `assets/suite-room-triple-occupancy/` | angle1–5.jpeg (5 files) |
+
+**There are no images at the root `assets/` level.** The old placeholder filenames (`night picture.png`, `room 1.png`, `daytime 2.png`, etc.) **do not exist** and must never be referenced. After any edit that touches `<img src>`, CSS `background-image`, or adds new image references, run a broken-image check before reporting done:
+
+```js
+// Quick Playwright check — 0 broken means all naturalWidth > 0
+const imgs = await page.locator('img').all();
+for (const img of imgs) { const nw = await img.evaluate(el => el.naturalWidth); ... }
+```
 
 ## Branding
 

@@ -343,7 +343,7 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('assets/night%20picture.png');
+            background-image: url('assets/premium-rooms-and-washrooms/angle2.jpeg');
             background-size: cover;
             background-position: center;
             transform: scale(1.06);
@@ -533,7 +533,108 @@
         }
         .room-card:hover { transform: translateY(-6px); box-shadow: 0 14px 42px var(--shadow-lg); }
 
-        .room-card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+        .room-img-btn {
+            display: block; width: 100%; padding: 0; border: none; background: none;
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+        .room-img-btn img { width: 100%; height: 210px; object-fit: cover; display: block;
+            transition: transform 0.4s ease; }
+        .room-img-btn:hover img { transform: scale(1.05); }
+        .room-img-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.38);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 6px; opacity: 0; transition: opacity 0.28s ease;
+        }
+        .room-img-overlay svg { width: 28px; height: 28px; stroke: #fff; fill: none;
+            stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .room-img-overlay span { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #fff; }
+        .room-img-btn:hover .room-img-overlay,
+        .room-img-btn:focus-visible .room-img-overlay { opacity: 1; }
+
+        /* Room Gallery Modal */
+        .rg-modal {
+            position: fixed; inset: 0; z-index: 9000;
+            display: flex; align-items: center; justify-content: center;
+            padding: 16px;
+            visibility: hidden; pointer-events: none;
+        }
+        .rg-modal.open { visibility: visible; pointer-events: all; }
+        .rg-backdrop {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.82);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .rg-modal.open .rg-backdrop { opacity: 1; }
+        .rg-box {
+            position: relative; z-index: 1;
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg); width: 100%; max-width: 860px;
+            max-height: 92vh; overflow-y: auto;
+            display: flex; flex-direction: column;
+            transform: translateY(32px) scale(0.97); opacity: 0;
+            transition: transform 0.32s ease, opacity 0.32s ease;
+        }
+        .rg-modal.open .rg-box { transform: none; opacity: 1; }
+        .rg-header {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            padding: 20px 24px 14px; border-bottom: 1px solid var(--divider);
+            flex-shrink: 0;
+        }
+        .rg-header .room-tag { margin-bottom: 4px; }
+        .rg-header h3 { font-size: 1.4rem; margin: 0; }
+        .rg-close {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-muted); padding: 4px; border-radius: 6px;
+            transition: color var(--ease), background var(--ease);
+            flex-shrink: 0; margin-left: 12px; margin-top: -2px;
+        }
+        .rg-close:hover { color: var(--text); background: var(--divider); }
+        .rg-close svg { width: 22px; height: 22px; display: block; }
+        .rg-main {
+            position: relative; background: #0a0a0a;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; min-height: 320px;
+        }
+        .rg-main img {
+            width: 100%; max-height: 52vh; object-fit: contain; display: block;
+            transition: opacity 0.2s ease;
+        }
+        .rg-main img.fading { opacity: 0; }
+        .rg-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; font-size: 1.6rem; width: 44px; height: 44px;
+            border-radius: 50%; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; transition: background 0.2s ease; z-index: 2;
+            line-height: 1;
+        }
+        .rg-nav:hover { background: rgba(201,168,76,0.7); }
+        .rg-nav:disabled { opacity: 0.25; pointer-events: none; }
+        .rg-prev { left: 12px; }
+        .rg-next { right: 12px; }
+        .rg-counter {
+            text-align: center; font-size: 0.72rem; letter-spacing: 0.1em;
+            color: var(--text-muted); padding: 10px 0 6px;
+        }
+        .rg-thumbs {
+            display: flex; gap: 8px; padding: 10px 20px 18px;
+            overflow-x: auto; flex-shrink: 0; scroll-snap-type: x mandatory;
+        }
+        .rg-thumbs::-webkit-scrollbar { height: 4px; }
+        .rg-thumbs::-webkit-scrollbar-track { background: transparent; }
+        .rg-thumbs::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 99px; }
+        .rg-thumb {
+            flex-shrink: 0; width: 76px; height: 56px; object-fit: cover;
+            border-radius: 6px; cursor: pointer; opacity: 0.55;
+            border: 2px solid transparent; transition: opacity 0.2s, border-color 0.2s;
+            scroll-snap-align: start;
+        }
+        .rg-thumb.active { opacity: 1; border-color: var(--accent); }
+        .rg-thumb:hover { opacity: 0.85; }
+        .rg-footer {
+            padding: 16px 24px 20px; border-top: 1px solid var(--divider);
+            display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap;
+        }
 
         .room-body { padding: 22px; }
 
@@ -959,7 +1060,7 @@
             </div>
 
             <div class="about-img-wrap">
-                <img src="assets/daytime%202.png" alt="Y Palace hotel exterior, Ongole" loading="lazy">
+                <img src="assets/suite-room-triple-occupancy/angle1.jpeg" alt="Y Palace hotel exterior, Ongole" loading="lazy">
                 <div class="about-badge">
                     <strong>4.8★</strong>
                     <span>Guest Rating</span>
@@ -985,39 +1086,13 @@
         <div class="rooms-grid">
 
             <div class="room-card fade-in">
-                <img src="assets/premium-rooms-and-washrooms/angle1.jpeg" alt="Y Palace Premium Room" loading="lazy">
-                <div class="room-body">
-                    <div class="room-tag">Classic</div>
-                    <h3>Premium Room</h3>
-                    <p>Warm gold accents, marble washroom, and plush bedding — everything you need for a restful, refined stay.</p>
-                    <div class="room-chips">
-                        <span class="chip">King Bed</span>
-                        <span class="chip">Free Wi-Fi</span>
-                        <span class="chip">AC</span>
-                        <span class="chip">Room Service</span>
+                <button class="room-img-btn" onclick="openRoomGallery('double')" aria-label="View Double King Size Bed Suite photo gallery">
+                    <img src="assets/double-king-size-bed-suite-room/Double%20Kind%20Size%20Bed%20Suite%20Room.jpeg" alt="Y Palace Double King Size Bed Suite" loading="lazy">
+                    <div class="room-img-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <span>View Gallery</span>
                     </div>
-                    <a href="tel:+919154315190" class="room-cta">Enquire Now</a>
-                </div>
-            </div>
-
-            <div class="room-card fade-in">
-                <img src="assets/premium-twin-beds/angle1.jpeg" alt="Y Palace Premium Twin Beds Room" loading="lazy">
-                <div class="room-body">
-                    <div class="room-tag">Classic</div>
-                    <h3>Premium Twin Beds</h3>
-                    <p>Two plush beds with premium furnishings — ideal for colleagues, friends, or families travelling together.</p>
-                    <div class="room-chips">
-                        <span class="chip">Twin Beds</span>
-                        <span class="chip">Free Wi-Fi</span>
-                        <span class="chip">AC</span>
-                        <span class="chip">Room Service</span>
-                    </div>
-                    <a href="tel:+919154315190" class="room-cta">Enquire Now</a>
-                </div>
-            </div>
-
-            <div class="room-card fade-in">
-                <img src="assets/double-king-size-bed-suite-room/Double%20Kind%20Size%20Bed%20Suite%20Room.jpeg" alt="Y Palace Double King Size Bed Suite" loading="lazy">
+                </button>
                 <div class="room-body">
                     <div class="room-tag">Suite</div>
                     <h3>Double King Size Bed Suite</h3>
@@ -1033,7 +1108,13 @@
             </div>
 
             <div class="room-card fade-in">
-                <img src="assets/suite-room-triple-occupancy/angle1.jpeg" alt="Y Palace Suite Room — Triple Occupancy" loading="lazy">
+                <button class="room-img-btn" onclick="openRoomGallery('triple')" aria-label="View Suite Triple Occupancy photo gallery">
+                    <img src="assets/suite-room-triple-occupancy/angle1.jpeg" alt="Y Palace Suite Room — Triple Occupancy" loading="lazy">
+                    <div class="room-img-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <span>View Gallery</span>
+                    </div>
+                </button>
                 <div class="room-body">
                     <div class="room-tag">Suite</div>
                     <h3>Suite — Triple Occupancy</h3>
@@ -1043,6 +1124,50 @@
                         <span class="chip">Free Wi-Fi</span>
                         <span class="chip">Butler</span>
                         <span class="chip">AC</span>
+                    </div>
+                    <a href="tel:+919154315190" class="room-cta">Enquire Now</a>
+                </div>
+            </div>
+
+            <div class="room-card fade-in">
+                <button class="room-img-btn" onclick="openRoomGallery('premium')" aria-label="View Premium Room photo gallery">
+                    <img src="assets/premium-rooms-and-washrooms/angle1.jpeg" alt="Y Palace Premium Room" loading="lazy">
+                    <div class="room-img-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <span>View Gallery</span>
+                    </div>
+                </button>
+                <div class="room-body">
+                    <div class="room-tag">Classic</div>
+                    <h3>Premium Room</h3>
+                    <p>Warm gold accents, marble washroom, and plush bedding — everything you need for a restful, refined stay.</p>
+                    <div class="room-chips">
+                        <span class="chip">King Bed</span>
+                        <span class="chip">Free Wi-Fi</span>
+                        <span class="chip">AC</span>
+                        <span class="chip">Room Service</span>
+                    </div>
+                    <a href="tel:+919154315190" class="room-cta">Enquire Now</a>
+                </div>
+            </div>
+
+            <div class="room-card fade-in">
+                <button class="room-img-btn" onclick="openRoomGallery('twin')" aria-label="View Premium Twin Beds photo gallery">
+                    <img src="assets/premium-twin-beds/angle1.jpeg" alt="Y Palace Premium Twin Beds Room" loading="lazy">
+                    <div class="room-img-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <span>View Gallery</span>
+                    </div>
+                </button>
+                <div class="room-body">
+                    <div class="room-tag">Classic</div>
+                    <h3>Premium Twin Beds</h3>
+                    <p>Two plush beds with premium furnishings — ideal for colleagues, friends, or families travelling together.</p>
+                    <div class="room-chips">
+                        <span class="chip">Twin Beds</span>
+                        <span class="chip">Free Wi-Fi</span>
+                        <span class="chip">AC</span>
+                        <span class="chip">Room Service</span>
                     </div>
                     <a href="tel:+919154315190" class="room-cta">Enquire Now</a>
                 </div>
@@ -1172,18 +1297,18 @@
         </div>
 
         <div class="gallery-grid">
-            <div class="gallery-item fade-in"><img src="assets/night%20picture.png"  alt="Y Palace illuminated at night" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/room%201.png"         alt="Premium Room" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/bathroom%201.png"     alt="Luxury marble bathroom" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/lunge%201.png"        alt="Hotel lobby lounge" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/room%202.png"         alt="Elite Room" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/daytime%201.png"      alt="Y Palace exterior, daytime" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/lounge%202.png"       alt="Guest lounge area" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/bathroom%202.png"     alt="Premium bathroom" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/room%203.png"         alt="Deluxe Room" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/funciton%20hall.png"  alt="Function hall event setup" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/night%205.png"        alt="Y Palace at night" loading="lazy"></div>
-            <div class="gallery-item fade-in"><img src="assets/lounge%203.png"       alt="Lounge seating area" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-rooms-and-washrooms/angle1.jpeg"                                        alt="Premium Room king bed" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-twin-beds/angle1.jpeg"                                                  alt="Premium Twin Beds room" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-rooms-and-washrooms/bathroom.jpeg"                                      alt="Luxury marble bathroom" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-rooms-and-washrooms/couch.jpeg"                                         alt="Premium room lounge seating" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/double-king-size-bed-suite-room/Double%20Kind%20Size%20Bed%20Suite%20Room.jpeg" alt="Double King Size Bed Suite" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/suite-room-triple-occupancy/angle1.jpeg"                                        alt="Suite — Triple Occupancy" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-rooms-and-washrooms/bathroom2.jpeg"                                     alt="Premium en-suite bathroom" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-twin-beds/angle2.jpeg"                                                  alt="Twin beds room detail" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-rooms-and-washrooms/table.jpeg"                                         alt="Room workspace and furnishings" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/suite-room-triple-occupancy/angle2.jpeg"                                        alt="Suite triple occupancy seating" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-rooms-and-washrooms/pic3.jpeg"                                          alt="Premium room ambience" loading="lazy"></div>
+            <div class="gallery-item fade-in"><img src="assets/premium-twin-beds/angle3.jpeg"                                                  alt="Twin room second angle" loading="lazy"></div>
         </div>
 
     </div>
@@ -1319,6 +1444,38 @@
 </footer>
 
 
+<!-- ═══════ ROOM GALLERY MODAL ═══════ -->
+<div id="roomGalleryModal" class="rg-modal" role="dialog" aria-modal="true" aria-labelledby="rgTitle" onclick="closeRoomGallery()">
+    <div class="rg-backdrop"></div>
+    <div class="rg-box" onclick="event.stopPropagation()">
+        <div class="rg-header">
+            <div>
+                <div class="room-tag" id="rgTag"></div>
+                <h3 id="rgTitle"></h3>
+            </div>
+            <button class="rg-close" onclick="closeRoomGallery()" aria-label="Close gallery">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="rg-main">
+            <button class="rg-nav rg-prev" id="rgPrev" onclick="rgNav(-1)" aria-label="Previous photo">&#8249;</button>
+            <img id="rgMainImg" src="" alt="">
+            <button class="rg-nav rg-next" id="rgNext" onclick="rgNav(1)" aria-label="Next photo">&#8250;</button>
+        </div>
+        <div class="rg-counter"><span id="rgCurrent">1</span> / <span id="rgTotal">1</span></div>
+        <div class="rg-thumbs" id="rgThumbs"></div>
+        <div class="rg-footer">
+            <a href="tel:+919154315190" class="btn btn-gold">Call to Enquire</a>
+            <a href="https://wa.me/919154315190" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
 <!-- ═══════ SCRIPTS ═══════ -->
 <script>
     /* ── Theme toggle ── */
@@ -1368,6 +1525,112 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.fade-in, .amenity').forEach(el => revealObserver.observe(el));
+
+    /* ── Room Gallery Modal ── */
+    const roomGalleries = {
+        premium: {
+            tag: 'Classic', title: 'Premium Room',
+            images: [
+                'assets/premium-rooms-and-washrooms/angle1.jpeg',
+                'assets/premium-rooms-and-washrooms/angle2.jpeg',
+                'assets/premium-rooms-and-washrooms/angle3.jpeg',
+                'assets/premium-rooms-and-washrooms/pic2.jpeg',
+                'assets/premium-rooms-and-washrooms/pic3.jpeg',
+                'assets/premium-rooms-and-washrooms/pic4.jpeg',
+                'assets/premium-rooms-and-washrooms/couch.jpeg',
+                'assets/premium-rooms-and-washrooms/table.jpeg',
+                'assets/premium-rooms-and-washrooms/bathroom.jpeg',
+                'assets/premium-rooms-and-washrooms/bathroom2.jpeg',
+                'assets/premium-rooms-and-washrooms/bathroom3.jpeg',
+            ]
+        },
+        twin: {
+            tag: 'Classic', title: 'Premium Twin Beds',
+            images: [
+                'assets/premium-twin-beds/angle1.jpeg',
+                'assets/premium-twin-beds/angle2.jpeg',
+                'assets/premium-twin-beds/angle3.jpeg',
+                'assets/premium-twin-beds/angle4.jpeg',
+            ]
+        },
+        double: {
+            tag: 'Suite', title: 'Double King Size Bed Suite',
+            images: [
+                'assets/double-king-size-bed-suite-room/Double%20Kind%20Size%20Bed%20Suite%20Room.jpeg',
+                'assets/double-king-size-bed-suite-room/Double%20Kind%20Size%20Bed%20Suite%20Room2.jpeg',
+                'assets/double-king-size-bed-suite-room/Double%20Kind%20Size%20Bed%20Suite%20Room3.jpeg',
+            ]
+        },
+        triple: {
+            tag: 'Suite', title: 'Suite — Triple Occupancy',
+            images: [
+                'assets/suite-room-triple-occupancy/angle1.jpeg',
+                'assets/suite-room-triple-occupancy/angle2.jpeg',
+                'assets/suite-room-triple-occupancy/angle3.jpeg',
+                'assets/suite-room-triple-occupancy/angle4.jpeg',
+                'assets/suite-room-triple-occupancy/angle5.jpeg',
+            ]
+        }
+    };
+
+    let rgCurrent = 0;
+    let rgImages  = [];
+
+    const rgModal    = document.getElementById('roomGalleryModal');
+    const rgMainImg  = document.getElementById('rgMainImg');
+    const rgThumbs   = document.getElementById('rgThumbs');
+    const rgTagEl    = document.getElementById('rgTag');
+    const rgTitleEl  = document.getElementById('rgTitle');
+    const rgCurrentEl = document.getElementById('rgCurrent');
+    const rgTotalEl  = document.getElementById('rgTotal');
+    const rgPrevBtn  = document.getElementById('rgPrev');
+    const rgNextBtn  = document.getElementById('rgNext');
+
+    function openRoomGallery(key) {
+        const room = roomGalleries[key];
+        rgImages   = room.images;
+        rgTagEl.textContent   = room.tag;
+        rgTitleEl.textContent = room.title;
+        rgTotalEl.textContent = rgImages.length;
+        rgThumbs.innerHTML = rgImages.map((src, i) =>
+            `<img class="rg-thumb${i === 0 ? ' active' : ''}" src="${src}" alt="Photo ${i+1}" onclick="rgGoTo(${i})" loading="lazy">`
+        ).join('');
+        rgGoTo(0);
+        rgModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeRoomGallery() {
+        rgModal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function rgGoTo(index) {
+        rgCurrent = index;
+        rgMainImg.classList.add('fading');
+        setTimeout(() => {
+            rgMainImg.src = rgImages[rgCurrent];
+            rgMainImg.alt = `Photo ${rgCurrent + 1}`;
+            rgMainImg.classList.remove('fading');
+        }, 100);
+        rgCurrentEl.textContent = rgCurrent + 1;
+        rgPrevBtn.disabled = rgCurrent === 0;
+        rgNextBtn.disabled = rgCurrent === rgImages.length - 1;
+        rgThumbs.querySelectorAll('.rg-thumb').forEach((t, i) => {
+            t.classList.toggle('active', i === rgCurrent);
+        });
+        const activeThumb = rgThumbs.children[rgCurrent];
+        if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    function rgNav(dir) { rgGoTo(rgCurrent + dir); }
+
+    document.addEventListener('keydown', e => {
+        if (!rgModal.classList.contains('open')) return;
+        if (e.key === 'Escape')      closeRoomGallery();
+        if (e.key === 'ArrowLeft'  && rgCurrent > 0)                   rgGoTo(rgCurrent - 1);
+        if (e.key === 'ArrowRight' && rgCurrent < rgImages.length - 1) rgGoTo(rgCurrent + 1);
+    });
 </script>
 
 </body>
