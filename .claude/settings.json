@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"c:\\\\Users\\\\Arjun\\\\source\\\\repos\\\\y-palace-website\\\\\")",
+      "Read(//c/Users/Arjun/source/repos/**)",
+      "Bash(python -m http.server 7832 --bind 127.0.0.1)",
+      "Bash(Start-Sleep -Milliseconds 800)",
+      "Bash(Invoke-WebRequest -Uri \"http://127.0.0.1:7832/\" -UseBasicParsing)",
+      "Bash(Select-Object -ExpandProperty StatusCode)",
+      "PowerShell(Start-Sleep -Milliseconds 800; \\(Invoke-WebRequest -Uri \"http://127.0.0.1:7832/\" -UseBasicParsing\\).StatusCode)",
+      "PowerShell(npm list -g playwright 2>$null)",
+      "PowerShell(npx playwright --version 2>$null)",
+      "PowerShell(cd \"C:\\\\Users\\\\Arjun\\\\AppData\\\\Local\\\\Temp\\\\yp-verify\"; node -e \"$\\(Get-Content test.js -Raw\\)\" 2>&1)",
+      "PowerShell(node -e \"require.resolve\\('playwright'\\)\" 2>&1; node -e \"require.resolve\\('@playwright/test'\\)\" 2>&1; \\(Get-Command npx\\).Source)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "PowerShell(Start-Process python -ArgumentList \"-m\", \"http.server\", \"7834\", \"--bind\", \"127.0.0.1\" -WorkingDirectory \"c:\\\\Users\\\\Arjun\\\\source\\\\repos\\\\y-palace-website\" -WindowStyle Hidden)"
+    ]
+  }
+}
