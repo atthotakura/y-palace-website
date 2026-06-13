@@ -16,16 +16,35 @@ Key hotel details:
 
 ## Assets
 
-Hotel photography is in [assets/](assets/) organized into four subdirectories — **not** the root `assets/` folder. All image `src` paths must point into these subdirectories:
+Hotel photography lives in [assets/](assets/). There are two tiers:
+
+**Root-level PNGs** (used for hero, about, and main gallery):
+
+| File | Used for |
+|---|---|
+| `night picture.png` | Hero background, gallery |
+| `daytime 1.png` / `daytime 2.png` | Gallery, about section |
+| `night.png` / `night 5.png` / `night time 2.png` | Gallery |
+| `lunge 1.png` / `lounge 2.png` / `lounge 3.png` | Gallery |
+| `room 1.png` / `room 2.png` / `room 3.png` / `room 6.png` / `room 7.png` / `room 8.png` | Gallery |
+| `bathroom 1.png` / `bathroom 2.png` | Gallery |
+| `funciton hall.png` | Gallery (note the typo in the filename) |
+| `entrance.png` | Available, not yet used |
+
+All filenames have spaces — URL-encode as `%20` in `src` attributes.
+
+**Room subdirectories** (used for room cards and gallery modals):
 
 | Subdirectory | Files |
 |---|---|
 | `assets/premium-rooms-and-washrooms/` | angle1–3.jpeg, pic2–4.jpeg, bathroom–3.jpeg, couch.jpeg, table.jpeg (11 files) |
 | `assets/premium-twin-beds/` | angle1–4.jpeg (4 files) |
-| `assets/double-king-size-bed-suite-room/` | `Double Kind Size Bed Suite Room.jpeg` × 3 (filenames have spaces — URL-encode as `%20`) |
+| `assets/double-king-size-bed-suite-room/` | `Double Kind Size Bed Suite Room.jpeg` × 3 (spaces → `%20`) |
 | `assets/suite-room-triple-occupancy/` | angle1–5.jpeg (5 files) |
+| `assets/elite-rooms/` | `WhatsApp Image 2026-06-06 at 21.20.36.jpeg` × 3 (spaces → `%20`) |
+| `assets/presidential-suite-room/` | `WhatsApp Image 2026-06-06 at 21.20.34.jpeg` (1 file — not yet wired up) |
 
-**There are no images at the root `assets/` level.** The old placeholder filenames (`night picture.png`, `room 1.png`, `daytime 2.png`, etc.) **do not exist** and must never be referenced. After any edit that touches `<img src>`, CSS `background-image`, or adds new image references, run a broken-image check before reporting done:
+After any edit that touches `<img src>`, CSS `background-image`, or adds new image references, run a broken-image check before reporting done:
 
 ```js
 // Quick Playwright check — 0 broken means all naturalWidth > 0

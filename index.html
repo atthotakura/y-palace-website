@@ -529,12 +529,6 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
         }
-        .rooms-grid > .room-card:last-child:nth-child(odd) {
-            grid-column: 1 / -1;
-            max-width: calc(50% - 12px);
-            justify-self: center;
-        }
-
         .room-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -1208,6 +1202,28 @@
                 </div>
             </div>
 
+            <div class="room-card fade-in">
+                <button class="room-img-btn" onclick="openRoomGallery('presidential')" aria-label="View Presidential Suite photo gallery">
+                    <img src="assets/presidential-suite-room/WhatsApp%20Image%202026-06-06%20at%2021.20.34.jpeg" alt="Y Palace Presidential Suite" loading="lazy">
+                    <div class="room-img-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <span>View Gallery</span>
+                    </div>
+                </button>
+                <div class="room-body">
+                    <div class="room-tag">Presidential</div>
+                    <h3>Presidential Suite</h3>
+                    <p>The pinnacle of Y Palace — our most expansive suite with premium furnishings, butler service, and every indulgence for the discerning guest.</p>
+                    <div class="room-chips">
+                        <span class="chip">King Bed</span>
+                        <span class="chip">Free Wi-Fi</span>
+                        <span class="chip">Butler</span>
+                        <span class="chip">AC</span>
+                    </div>
+                    <a href="tel:+919154315190" class="room-cta">Enquire Now</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -1466,7 +1482,7 @@
         <div class="footer-hr"></div>
 
         <div class="footer-bottom">
-            <span>&copy; 2025 Y Palace. All rights reserved.</span>
+            <span>&copy; 2026 Y Palace. All rights reserved.</span>
             <span>Opposite RTC Depot, Ongole, Andhra Pradesh</span>
         </div>
 
@@ -1612,6 +1628,12 @@
                 'assets/elite-rooms/WhatsApp%20Image%202026-06-06%20at%2021.20.36.jpeg',
                 'assets/elite-rooms/WhatsApp%20Image%202026-06-06%20at%2021.20.37.jpeg',
                 'assets/elite-rooms/WhatsApp%20Image%202026-06-06%20at%2021.20.38.jpeg',
+            ]
+        },
+        presidential: {
+            tag: 'Presidential', title: 'Presidential Suite',
+            images: [
+                'assets/presidential-suite-room/WhatsApp%20Image%202026-06-06%20at%2021.20.34.jpeg',
             ]
         }
     };
